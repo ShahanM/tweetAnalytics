@@ -8,17 +8,17 @@ import java.util.List;
  */
 public final class SimilarityMatrix {
 
-    public static float findCosineSimilarity(List<Float> vectorA, List<Float> vectorB){
-        float dotProduct = dotProduct(vectorA, vectorB);
-        float magnitudeA = magnitude(vectorA);
-        float magnitudeB = magnitude(vectorB);
-        float result = dotProduct / (magnitudeA * magnitudeB);
+    public static Double findCosineSimilarity(List<Double> vectorA, List<Double> vectorB){
+        Double dotProduct = dotProduct(vectorA, vectorB);
+        Double magnitudeA = magnitude(vectorA);
+        Double magnitudeB = magnitude(vectorB);
+        Double result = dotProduct / (magnitudeA * magnitudeB);
 
-        return Float.isNaN(result) ? 0 : result;
+        return Double.isNaN(result) ? 0 : result;
     }
 
-    public static float dotProduct(List<Float> vectorA, List<Float> vectorB){
-        float product = 0;
+    public static Double dotProduct(List<Double> vectorA, List<Double> vectorB){
+        Double product = 0.0;
 
         for(int i = 0; i < vectorA.size(); i++){
             product += vectorA.get(i) * vectorB.get(i);
@@ -27,12 +27,12 @@ public final class SimilarityMatrix {
         return product;
     }
 
-    public static float magnitude(List<Float> vector){
-        return (float)Math.sqrt(dotProduct(vector, vector));
+    public static Double magnitude(List<Double> vector){
+        return Math.sqrt(dotProduct(vector, vector));
     }
 
-    public static float findEucledianDistance(int[] vectorA, int[] vectorB){
-        float euclidianDistance = 0;
+    public static Double findEucledianDistance(int[] vectorA, int[] vectorB){
+        Double euclidianDistance = 0.0;
 
         for(int i = 0; i < vectorA.length; i++){
             euclidianDistance += Math.pow((vectorA[i] - vectorB[i]), 2);
@@ -41,10 +41,10 @@ public final class SimilarityMatrix {
         return euclidianDistance;
     }
 
-    public static float findExtendedJaccard(List<Float> vectorA, List<Float> vectorB){
-        float dotProduct = dotProduct(vectorA, vectorB);
-        float magnitudeA = magnitude(vectorA);
-        float magnitudeB = magnitude(vectorB);
+    public static Double findExtendedJaccard(List<Double> vectorA, List<Double> vectorB){
+        Double dotProduct = dotProduct(vectorA, vectorB);
+        Double magnitudeA = magnitude(vectorA);
+        Double magnitudeB = magnitude(vectorB);
 
         return dotProduct / (magnitudeA + magnitudeB - dotProduct);
     }

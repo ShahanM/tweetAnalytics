@@ -27,7 +27,7 @@ public class Vectorizer {
 
         List<TextVector> vectorSpace = Lists.newArrayList();
 
-        List<Float> space = Lists.newArrayList();
+        List<Double> space = Lists.newArrayList();
         for(String text : textList){
             space.addAll(distinctTerms.stream().map(term -> determineTFIDF(text, term)).collect(Collectors.toList()));
             vectorSpace.add(new TextVector(text, space));
@@ -36,22 +36,22 @@ public class Vectorizer {
         return vectorSpace;
     }
 
-    private Float determineTFIDF(String text, String term){
-        Float tf = calculateTermFrequency(text, term);
-        Float idf = calculateInverseTexttFrequency(term);
+    private Double determineTFIDF(String text, String term){
+        Double tf = calculateTermFrequency(text, term);
+        Double idf = calculateInverseTexttFrequency(term);
         return tf*idf;
     }
 
-    private Float calculateTermFrequency(String text, String term){
+    private Double calculateTermFrequency(String text, String term){
         List<String> tokens = Lists.newArrayList(regex.split(text));
         long count = tokens.stream()
                 .filter(t -> t.toUpperCase().equals(term.toUpperCase())).count();
-        return (float)count / (float)tokens.size();
+        return (double)count / (double)tokens.size();
     }
 
-    private Float calculateInverseTexttFrequency(String term){
+    private Double calculateInverseTexttFrequency(String term){
         long count = textList.stream().filter(text -> Lists.newArrayList(text.split(" ")).contains(term)).count();
-        return (float)Math.log((float)textList.size() / (float)count);
+        return Math.log(textList.size() / count);
     }
 
 }

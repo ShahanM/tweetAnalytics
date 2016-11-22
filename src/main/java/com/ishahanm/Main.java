@@ -1,16 +1,13 @@
 package com.ishahanm;
 
 import com.google.common.collect.Lists;
-import com.ishahanm.cluster.DBScan;
-import com.ishahanm.cluster.Point;
-import com.ishahanm.cluster.TextVector;
+import com.ishahanm.cluster.*;
 import com.ishahanm.nlp.Vectorizer;
 import com.ishahanm.twitter.Tweet;
 import com.ishahanm.twitter.TweetCollection;
 import com.ishahanm.twitter.TweetFetcher;
 
 import java.util.List;
-import java.util.Vector;
 
 public class Main {
 
@@ -38,16 +35,18 @@ public class Main {
         Vectorizer vectorizedList = new Vectorizer();
 
         List<TextVector> tweetVectors = vectorizedList.processTweetCollection(tweetCollection);
-        Vector<Point> points = new Vector<>();
+        List<Point> points = Lists.newArrayList();
         for(int i = 0; i < tweetVectors.size(); i++){
             for(int j = 0; j < tweetVectors.get(i).getVectorSpace().size(); j++) {
                 points.add(new Point(i, tweetVectors.get(i).getVectorSpace().get(j)));
             }
         }
+        KMeans kmeans = new KMeans(points);
+        List<Cluster> kmeanResult = kmeans.execute();
+        System.out.println("K-Mean results: " + kmeanResult.size());
 
         DBScan dbScan = new DBScan(points);
-        Vector<List> results = dbScan.execute();
-
-        System.out.println(results.size());
+        List<Cluster> dbResults = dbScan.execute();
+        System.out.println("DBScan clusters: " + dbResults.size());
     }
 }

@@ -31,11 +31,6 @@ public class TweetFetcher {
         String oAuthAccessToken = properties.getProperty("oAuthAccessToken");
         String oAuthAccessTokenSecret = properties.getProperty("oAuthAccessTokenSecret");
 
-        System.out.println(oAuthConsumerKey);
-        System.out.println(oAuthConsumerSecret);
-        System.out.println(oAuthAccessToken);
-        System.out.println(oAuthAccessTokenSecret);
-
         ConfigurationBuilder configurationBuilder = new ConfigurationBuilder();
         configurationBuilder.setDebugEnabled(true)
             .setOAuthConsumerKey(oAuthConsumerKey)
@@ -51,7 +46,7 @@ public class TweetFetcher {
         Twitter twitter = getInstance();
 
         Query query = new Query("#guitar");
-        int numberOfTweets = 500;
+        int numberOfTweets = 10;
         long lastID = Long.MAX_VALUE;
         ArrayList<Status> tweets = Lists.newArrayList();
         while (tweets.size() < numberOfTweets) {

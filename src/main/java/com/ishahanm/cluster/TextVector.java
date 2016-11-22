@@ -9,9 +9,9 @@ import java.util.List;
 public class TextVector {
 
     public String content;
-    public List<Float> vectorSpace;
+    public List<Double> vectorSpace;
 
-    public TextVector(String content, List<Float> vectorSpace){
+    public TextVector(String content, List<Double> vectorSpace){
         this.content = content;
         this.vectorSpace = vectorSpace;
     }
@@ -24,11 +24,11 @@ public class TextVector {
         this.content = content;
     }
 
-    public List<Float> getVectorSpace() {
+    public List<Double> getVectorSpace() {
         return vectorSpace;
     }
 
-    public void setVectorSpace(List<Float> vectorSpace) {
+    public void setVectorSpace(List<Double> vectorSpace) {
         this.vectorSpace = vectorSpace;
     }
 }
