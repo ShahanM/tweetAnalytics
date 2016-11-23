@@ -55,6 +55,7 @@ public class Vectorizer {
     }
 
     private List<String> lemmatize(List<String> words){
+        //TODO implement this
         return Lists.newArrayList();
     }
 
