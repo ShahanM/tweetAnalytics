@@ -3,11 +3,13 @@ package com.ishahanm;
 import com.google.common.collect.Lists;
 import com.ishahanm.cluster.*;
 import com.ishahanm.nlp.Vectorizer;
+import com.ishahanm.stanfordnlp.SentimentAnalyzer;
 import com.ishahanm.twitter.Tweet;
 import com.ishahanm.twitter.TweetCollection;
 import com.ishahanm.twitter.TweetFetcher;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Main {
 
@@ -26,7 +28,21 @@ public class Main {
         System.out.println("Prepping for Clustering");
         TweetCollection tweetCollection = new TweetCollection(tweets);
 
-        startClustering(tweetCollection);
+        //startClustering(tweetCollection);
+        analyzeSentiment(tweetCollection);
+    }
+
+    private static void analyzeSentiment(TweetCollection tweetCollection){
+        List<String> tweetMsgs = Lists.newArrayList();
+        tweetMsgs.addAll(tweetCollection.getTweets().stream().map(Tweet::getContent).collect(Collectors.toList()));
+        try {
+            SentimentAnalyzer sentimentAnalyzer = new SentimentAnalyzer();
+            for (String tweetMsg : tweetMsgs) {
+                System.out.println(tweetMsg + " : " + sentimentAnalyzer.findSentiment(tweetMsg));
+            }
+        } catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     private static void startClustering(TweetCollection tweetCollection){

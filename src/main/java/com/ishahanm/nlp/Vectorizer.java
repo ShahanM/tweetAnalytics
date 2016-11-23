@@ -54,4 +54,8 @@ public class Vectorizer {
         return Math.log(textList.size() / count);
     }
 
+    private List<String> lemmatize(List<String> words){
+        return Lists.newArrayList();
+    }
+
 }
